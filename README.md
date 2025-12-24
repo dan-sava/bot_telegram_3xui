@@ -1,5 +1,4 @@
 # bot_telegram_3xui
-# 3x-ui Telegram Bot (X-UI / 3x-ui) + Оплаты/Напоминания
 ---
 
 ## Структура проекта
