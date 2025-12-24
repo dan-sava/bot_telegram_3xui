@@ -911,8 +911,8 @@ async def payschedule(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             pre_time = dtime(hour=hh, minute=mm, tzinfo=tz)
             hh2, mm2 = map(int, sched.get("remind", "10:00").split(":"))
             rem_time = dtime(hour=hh2, minute=mm2, tzinfo=tz)
-            jq.run_monthly(job_monthly_prelist, time=pre_time, day=sched.get("day",10), name='monthly_prelist', timezone=tz)
-            jq.run_monthly(job_monthly_payment, time=rem_time, day=sched.get("day",10), name='monthly_payment', timezone=tz)
+            jq.run_monthly(job_monthly_prelist, when=pre_time, day=sched.get("day", 10), name="monthly_prelist")
+            jq.run_monthly(job_monthly_payment, when=rem_time, day=sched.get("day", 10), name="monthly_payment")
         except Exception as e:
             await update.message.reply_text(f"Ошибка планировщика: {e}")
             return
@@ -1658,11 +1658,11 @@ async def _post_init(app):
         # Prelist job
         hh, mm = map(int, sched.get("prelist","09:00").split(":"))
         pre_time = dtime(hour=hh, minute=mm, tzinfo=tz)
-        jq.run_monthly(job_monthly_prelist, time=pre_time, day=sched.get("day",10), name='monthly_prelist', timezone=tz)
+        jq.run_monthly(job_monthly_prelist, when=pre_time, day=sched.get("day",10), name='monthly_prelist')
         # Reminder job
         hh2, mm2 = map(int, sched.get("remind","10:00").split(":"))
         rem_time = dtime(hour=hh2, minute=mm2, tzinfo=tz)
-        jq.run_monthly(job_monthly_payment, time=rem_time, day=sched.get("day",10), name='monthly_payment', timezone=tz)
+        jq.run_monthly(job_monthly_payment, when=rem_time, day=sched.get("day",10), name='monthly_payment')
         print(f"Monthly jobs scheduled: day={sched.get('day',10)} prelist={sched.get('prelist','09:00')} remind={sched.get('remind','10:00')} tz={sched.get('tz','Asia/Novosibirsk')}")
     except Exception as e:
         print("post_init warning:", e)
