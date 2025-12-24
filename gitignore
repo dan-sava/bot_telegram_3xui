@@ -1,0 +1,6 @@
+.env
+bot_data.pkl
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
